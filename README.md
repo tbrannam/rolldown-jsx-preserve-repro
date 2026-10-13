@@ -23,6 +23,19 @@ function C() {
 ───╯
 ```
 
+## Control: the plugin is the cause
+
+`rolldown.config.control.mjs` is identical except that `viteTransformPlugin` is not
+registered:
+
+```
+pnpm build:control     # succeeds, JSX preserved
+pnpm build              # fails, PARSE_ERROR
+```
+
+Same input, same `transform: { jsx: 'preserve' }`, same rolldown version. The only
+difference is whether `builtin:vite-transform` is in the pipeline.
+
 ## Why
 
 `builtin:vite-transform` reports `module_type: Some(ModuleType::Js)` unconditionally
